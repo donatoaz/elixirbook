@@ -15,7 +15,7 @@ defmodule Countdown do
   end
 
   def say(text) do
-    spawn fn -> :os.cmd('say #{text}') end
+    spawn fn -> :os.cmd('echo #{text}') end
   end
 
   def timer do

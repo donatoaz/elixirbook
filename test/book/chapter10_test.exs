@@ -2,7 +2,9 @@ defmodule Book.Chapter10Test do
     use ExUnit.Case, async: false
     use ExCheck
     import ExUnit.CaptureIO
+
     alias Book.Chapter10
+    alias Book.Chapter7
 
     test "test all simple case, true" do
         assert Chapter10.all?([1,2,3], &(&1 < 5)) == true
@@ -55,4 +57,28 @@ defmodule Book.Chapter10Test do
         # [3]
     end
 
+    test "test comprehensions prime numbers" do
+        my_span = Chapter7.span(2,10)
+        my_primes = for x <- my_span, Chapter10.is_prime(x), do: x
+        assert my_primes == [2,3,5,7]
+    end
+
+    test "tax charging" do
+        tax_rates = [ NC: 0.075, TX: 0.08 ]
+        orders = [
+            [id: 123, ship_to: :NC, net_amount: 100.00],
+            [id: 124, ship_to: :OK, net_amount: 35.50],
+            [id: 125, ship_to: :TX, net_amount: 24.00]
+        ]
+
+        valid_taxed_orders = [
+            [total_amount: 107.50, id: 123, ship_to: :NC, net_amount: 100.00],
+            [total_amount: 35.50, id: 124, ship_to: :OK, net_amount: 35.50],
+            [total_amount: 25.92, id: 125, ship_to: :TX, net_amount: 24.00]
+        ]
+
+        taxed_orders = orders
+            |> Chapter10.apply_tax(tax_rates)
+        assert taxed_orders == valid_taxed_orders
+    end
 end
