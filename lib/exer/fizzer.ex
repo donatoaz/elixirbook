@@ -1,8 +1,8 @@
 defmodule Exer.Fizzer do
-    def fizzer(0, 0, _), do: "FizzBuzz"
-    def fizzer(0, _, _), do: "Fizz"
-    def fizzer(_, 0, _), do: "Buzz"
-    def fizzer(_, _, n), do: n
+  def fizzer(0, 0, _), do: "FizzBuzz"
+  def fizzer(0, _, _), do: "Fizz"
+  def fizzer(_, 0, _), do: "Buzz"
+  def fizzer(_, _, n), do: n
 end
 
 # command+option+arrow = duplicates line
